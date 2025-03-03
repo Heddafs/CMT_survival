@@ -442,7 +442,7 @@ corr_matrix <- matrix(nrow = ncol(clinical_notonehot), ncol = ncol(clinical_noto
 for (i in colnames(clinical_notonehot)) {
   for (j in colnames(clinical_notonehot)) {
     if (i == "Age" | j == "Age"){ #Age is only continous variable, test
-      corr <- stats::cor.test(clinical_notonehot[,i], clinical_notonehot[,j])
+      corr <- stats::cor.test(clinical_notonehot[,i], clinical_notonehot[,j], method = "pearson")
       corr_matrix[j,i]  <- corr$p.value
     }
     else{ #for two categorical variables, association is tested with chi squared

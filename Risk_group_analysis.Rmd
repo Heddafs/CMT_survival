@@ -191,12 +191,14 @@ openxlsx::write.xlsx(res_save, 'plots/results_DGE_one_model.xlsx')
 
 ### Summary of results
 
-With FDR= 0.05, there are 2073 differentially expressed genes
+With FDR= 0.05 and log2FoldChange > 1 or < -1, there are 433 differentially expressed genes. 
+279 genes were enriched in the high-risk group and 154 genes were enriched in the low-risk group
 
 ```{r}
 res05 <- results(dds_tumor, alpha=0.05) 
-summary(res05)
-sum(res05$padj < 0.05, na.rm=TRUE) #number of genes with padj below 0.05
+sum(res05$padj < 0.05 & res05$log2FoldChange>1, na.rm=TRUE) 
+sum(res05$padj < 0.05 & res05$log2FoldChange<(-1), na.rm=TRUE) 
+
 ```
 
 ### Plots of result
